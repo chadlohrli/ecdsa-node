@@ -6,10 +6,11 @@ const port = 3042;
 app.use(cors());
 app.use(express.json());
 
+// TODO: change these based on keytool.js generation
 const balances = {
-  "0x1": 100,
-  "0x2": 50,
-  "0x3": 75,
+  "0xaefb3689b9d4c82792995b0fc288eb8cd16b1519": 100,
+  "0x3e2dd124668145274577734ff2299aeaab8826e5": 50,
+  "0x8d62d4e0d2d16884336f3d3349426f0dcf76466f": 75,
 };
 
 app.get("/balance/:address", (req, res) => {
