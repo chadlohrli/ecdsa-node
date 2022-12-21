@@ -1,7 +1,7 @@
 import { useState } from "react";
 import server from "./server";
 
-function Transfer({ address, setBalance }) {
+function Transfer({ signature, setSignature, recoveryBit, setRecoveryBit, setBalance }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
 
@@ -14,7 +14,8 @@ function Transfer({ address, setBalance }) {
       const {
         data: { balance },
       } = await server.post(`send`, {
-        sender: address,
+        signature: signature,
+        recoveryBit: recoveryBit,
         amount: parseInt(sendAmount),
         recipient,
       });
@@ -27,6 +28,7 @@ function Transfer({ address, setBalance }) {
   return (
     <form className="container transfer" onSubmit={transfer}>
       <h1>Send Transaction</h1>
+      <p>Provide a signature with a message using the following word: <b>gm</b></p>
 
       <label>
         Send Amount
@@ -38,9 +40,27 @@ function Transfer({ address, setBalance }) {
       </label>
 
       <label>
-        Recipient
+        Signature
         <input
-          placeholder="Type an address, for example: 0x2"
+          placeholder="0x..."
+          value={signature}
+          onChange={setValue(setSignature)}
+        ></input>
+      </label>
+
+      <label>
+        Recovery Bit
+        <input
+          placeholder="1"
+          value={recoveryBit}
+          onChange={setValue(setRecoveryBit)}
+        ></input>
+      </label>
+
+      <label>
+        Recipient Address
+        <input
+          placeholder="0x..."
           value={recipient}
           onChange={setValue(setRecipient)}
         ></input>

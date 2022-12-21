@@ -26,6 +26,9 @@ const sign = async (msg, privateKey) => {
   let msgHash = keccak256(utf8ToBytes(msg))
   let signer = await secp.sign(msgHash, privateKey, {recovered: true})
 
+  console.log(`signature: ${utils.toHex(signer[0])}`)
+  console.log(`recovered bit: ${signer[1]}`)
+
   let pubKey = await secp.recoverPublicKey(msgHash, signer[0], signer[1]);
   console.log(`public key: ${utils.toHex(pubKey.slice(1))}`)
 }
