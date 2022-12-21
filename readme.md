@@ -29,3 +29,10 @@ The server folder contains a node.js server using [express](https://expressjs.co
 The application should connect to the default server port (3042) automatically! 
 
 _Hint_ - Use [nodemon](https://www.npmjs.com/package/nodemon) instead of `node` to automatically restart the server on any changes.
+
+### Solution
+1. Use `server/keytool.js` to generate keys via `generateKeys(Number)`
+2. Use `server/keytool.js` to generate a signature via `sign(String, String)`
+    * [TODO]: current msg is `gm` but this can be an incrementing nonce
+3. Add Signature and RecoveryBit to send a Transaction via client UI
+
